@@ -10,7 +10,6 @@ public:
                     ans+=x.second;
                     num = num - x.first;
                     break;
-                    
                 }
             }
             
