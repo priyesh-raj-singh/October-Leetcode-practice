@@ -1,18 +1,21 @@
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-    	
-        unordered_map<int, int> hashMap{{0, 0}};
+        unordered_map<int , int> mp;
+        mp[0] = -1;
         int sum = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            sum += nums[i];
-            
-            if (!hashMap.count(sum % k))
-                hashMap[sum % k] = i + 1;
-            
-            else if (hashMap[sum % k] < i)
-                return true;
+        
+        for(int i = 0 ; i<nums.size() ; i++){
+            sum+=nums[i];
+            sum = sum%k;
+            if(mp.find(sum) != mp.end()){
+                if(i - mp[sum] > 1)
+                    return true;
+            }
+            else
+                mp[sum] = i;
         }
         return false;
+        
     }
 };
