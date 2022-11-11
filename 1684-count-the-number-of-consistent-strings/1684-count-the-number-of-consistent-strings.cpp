@@ -1,17 +1,21 @@
 class Solution {
 public:
-    bool check(string& allowed , string &s){
-        for(int i = 0 ; i<s.size() ; i++){
-            if(allowed.find(s[i])==string::npos)
-                return false;
-        }
-        return true;
-    }
     int countConsistentStrings(string allowed, vector<string>& words) {
+        unordered_map<char , int> mp;
+        for(auto it: allowed)
+            mp[it]++;
+        
+        
+        bool x = true;
         int count = 0;
         for(int i = 0 ; i<words.size() ; i++){
-            if(check(allowed , words[i]))
-                count++;
+            x = true;
+            for(auto it: words[i])
+            {
+                if(mp.find(it)==mp.end()) x = false;
+                
+            }
+            if(x==true) count++;
         }
         return count;
         
